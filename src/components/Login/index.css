@@ -1,0 +1,112 @@
+.bg {
+  background-image: url('https://i.ibb.co/741ShxJ/netfilx-1-1.png');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+.bg-flexing-item {
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.website-image {
+  margin: 33px;
+  height: 44px;
+  width: 200px;
+}
+.card-login {
+  width: 456px;
+  height: 440px;
+  border-radius: 8px;
+  color: #ffffff;
+  background-color: #0c0b10;
+  opacity: 0.8;
+  padding: 32px;
+}
+.heading-login {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+}
+
+.username {
+  background-color: #333333;
+  width: 100%;
+  height: 40px;
+  color: #e2e8f0;
+
+  outline: none;
+  border: 0px;
+  margin-top: 4px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-left: 7px;
+}
+
+.password {
+  background-color: #333333;
+  width: 100%;
+  height: 40px;
+  color: #e2e8f0;
+  outline: none;
+  border: 0px;
+  margin-top: 4px;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  padding-left: 7px;
+}
+.login-button {
+  background-color: #e50914;
+  width: 100%;
+  height: 40px;
+  color: #f8fafc;
+  outline: none;
+  border: 0px;
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.label-username {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: #ffffff;
+}
+.label-password {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: #ffffff;
+}
+.errorMsg {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #dc2626;
+}

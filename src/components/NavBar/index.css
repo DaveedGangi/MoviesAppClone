@@ -1,0 +1,74 @@
+.navBarBg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 80px;
+  background-color: #131313;
+
+  color: #f8fafc;
+  padding: 5px;
+  width: 100%;
+  height: 103px;
+  opacity: 0.2px;
+}
+.navLeftSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 350px;
+}
+.website-image {
+  width: 135px;
+  height: 39px;
+  top: 32px;
+  left: 165px;
+  padding: 0px, 0px, 0px, 0px;
+  margin-bottom: 22px;
+}
+.HomeAndPopular {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  margin-top: 12px;
+}
+
+.navRightSide {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+  margin-top: 12px;
+  margin-right: 23px;
+}
+.navInputElements {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  height: 25px;
+  margin-top: 22px;
+  width: Hug (264px);
+  height: Fixed (40px);
+  top: 32px;
+  left: 931px;
+  gap: 10px;
+}
+.navInput {
+  color: #f8fafc;
+  background-color: #131313;
+  width: Fill (264px);
+  height: Hug (40px);
+  padding: 8px, 16px, 8px, 16px;
+  border-radius: 4px;
+  border: 1px;
+}
+.avatar {
+  width: 48px;
+  height: 48px;
+  top: 28px;
+  left: 1227px;
+}
+.nav-input-label {
+  cursor: pointer;
+}
