@@ -8,11 +8,14 @@ import NavBar from '../NavBar'
 
 import BottomFooter from '../BottomFooter'
 
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+
 import './index.css'
 
 const settings = {
-  dots: false,
-  infinite: false,
+  dots: true,
+  infinite: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
@@ -42,7 +45,7 @@ const settings = {
 }
 
 class Home extends Component {
-  state = {storeListOfTrendingMovies: []}
+  state = {storeListOfTrendingMovies: [], storeListOfOriginalMovies: []}
 
   componentDidMount() {
     this.renderHomeOriginalImages()
@@ -102,24 +105,38 @@ class Home extends Component {
         title: each.title,
       }))
       console.log(originalMoviesStorage)
+      this.setState({storeListOfOriginalMovies: originalMoviesStorage})
     }
   }
 
   render() {
-    const {storeListOfTrendingMovies} = this.state
+    const {storeListOfTrendingMovies, storeListOfOriginalMovies} = this.state
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken === undefined) {
       const {history} = this.props
       history.replace('/login')
     }
     return (
-      <div>
+      <div className="bg-home">
         <div>
           <NavBar />
         </div>
         <h1>Hi Iam Home</h1>
+
         <div className="main-container">
           <div className="slick-container">
+            <h1 className="trending-heading">Trending Now</h1>
+            <link
+              rel="stylesheet"
+              type="text/css"
+              charset="UTF-8"
+              href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+            />
             <Slider {...settings}>
               {storeListOfTrendingMovies.map(eachLogo => {
                 const {id, posterPath} = eachLogo
@@ -136,6 +153,40 @@ class Home extends Component {
             </Slider>
           </div>
         </div>
+
+        <div className="OriginalMovies">
+          <div className="main-container">
+            <div className="slick-container">
+              <h1 className="originals-heading">Originals</h1>
+              <link
+                rel="stylesheet"
+                type="text/css"
+                charset="UTF-8"
+                href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+              />
+              <Slider {...settings}>
+                {storeListOfOriginalMovies.map(eachLogo => {
+                  const {id, posterPath} = eachLogo
+                  return (
+                    <div className="slick-item" key={id}>
+                      <img
+                        className="logo-image"
+                        src={posterPath}
+                        alt="company logo"
+                      />
+                    </div>
+                  )
+                })}
+              </Slider>
+            </div>
+          </div>
+        </div>
+
         <div>
           <BottomFooter />
         </div>
