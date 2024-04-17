@@ -179,7 +179,7 @@ class Home extends Component {
   )
 
   loaderForHomePosterMovieItems = () => (
-    <div>
+    <div className="homePosterLoader">
       <div className="loader-container" testid="loader">
         <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
       </div>
@@ -305,7 +305,39 @@ class Home extends Component {
     )
   }
 
-  renderHomePosterMovieItems = () => {
+  renderHomePosterMovieItems = async () => {
+    this.setState({homePosterDataStatus: homeRandomPosterStatus.isLoading})
+    const api = 'https://apis.ccbp.in/movies-app/originals'
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+
+    const response = await fetch(api, options)
+    console.log(response)
+    if (response.ok === true) {
+      const responseOriginalsJson = await response.json()
+      console.log('Originals')
+      console.log(responseOriginalsJson)
+      const originalMoviesStorage = responseOriginalsJson.results.map(each => ({
+        id: each.id,
+        backDrop: each.backdrop_path,
+        overView: each.overview,
+        posterPath: each.poster_path,
+        title: each.title,
+      }))
+      console.log(originalMoviesStorage)
+      this.setState({
+        storeListOfOriginalMovies: originalMoviesStorage,
+        homePosterDataStatus: homeRandomPosterStatus.success,
+      })
+    } else {
+      this.setState({homePosterDataStatus: homeRandomPosterStatus.failure})
+    }
+
     const {storeListOfTrendingMovies, storeListOfOriginalMovies} = this.state
     this.setState({homePosterDataStatus: homeRandomPosterStatus.isLoading})
     const homeMoviePoster = [
@@ -371,14 +403,13 @@ class Home extends Component {
         <div>
           <NavBar />
         </div>
-        <div className="bg-poster-items">
-          <h1 className="random-movie-title">{randomMovieItemPoster.title}</h1>
+        <div className="inPoster">
+          <h1 className="titleOnPoster">{randomMovieItemPoster.title}</h1>
 
-          <p className="random-movie-overview">
-            {randomMovieItemPoster.overView}
-          </p>
-          <div className="random-button">
-            <button className="random-movie-button" type="button">
+          <p className="overViewPoster">{randomMovieItemPoster.overView}</p>
+
+          <div className="randomButton">
+            <button className="randomMovieButton" type="button">
               Play
             </button>
           </div>

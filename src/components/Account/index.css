@@ -1,0 +1,26 @@
+.accountBg {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 22px;
+  padding: 22px;
+}
+.accountContent {
+  width: 100%;
+}
+.logOutButton {
+  background: #e50914;
+  color: #ffffff;
+  width: Hug (89px) px;
+  height: Hug (40px) px;
+  top: 508px;
+  left: 675px;
+  padding: 8px 20px 8px 20px;
+  gap: 10px;
+  border-radius: 4px;
+  opacity: 0px;
+  cursor: pointer;
+  outline: none;
+  border: 0px;
+}

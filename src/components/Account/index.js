@@ -6,6 +6,8 @@ import CartContext from '../../Context/index'
 
 import NavBar from '../NavBar'
 
+import BottomFooter from '../BottomFooter'
+
 import './index.css'
 
 class Account extends Component {
@@ -23,23 +25,33 @@ class Account extends Component {
             return (
               <div>
                 <NavBar />
-                <h1>Account</h1>
-                <hr />
-                <div>
-                  <h1>Member ship</h1>
-                  <h1>{userNames}@gmail.com</h1>
-                  <p>Password: * * * * * * * * *</p>
+                <div className="accountBg">
+                  <div className="accountContent">
+                    <h1>Account</h1>
+                    <hr />
+                    <div>
+                      <h1>Member ship</h1>
+                      <h1>{userNames}@gmail.com</h1>
+                      <p>Password: * * * * * * * * *</p>
+                    </div>
+                    <hr />
+                    <p>
+                      Plan details Premium &nbsp; &nbsp;
+                      <span style={{border: '1px solid black'}}> Ultra HD</span>
+                    </p>
+                    <hr />
+                    <div>
+                      <button
+                        className="logOutButton"
+                        onClick={this.removingCookie}
+                        type="button"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <hr />
-                <p>
-                  Plan details <span>Premium Ultra HD</span>
-                </p>
-                <hr />
-                <div>
-                  <button onClick={this.removingCookie} type="button">
-                    Logout
-                  </button>
-                </div>
+                <BottomFooter />
               </div>
             )
           }}

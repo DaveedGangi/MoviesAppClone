@@ -6,7 +6,7 @@ import {FiAlertTriangle} from 'react-icons/fi'
 
 import Cookies from 'js-cookie'
 
-import NavBar from '../NavBar'
+import {Link} from 'react-router-dom'
 
 import BottomFooter from '../BottomFooter'
 
@@ -116,7 +116,51 @@ class MovieItemDetails extends Component {
           }}
         >
           <div>
-            <NavBar />
+            <div className="navBarBgD">
+              <div className="navLeftSide">
+                <Link to="/" className="webSiteImageNav">
+                  <img
+                    className="website-image"
+                    src="https://i.ibb.co/xDLJrF3/Group-7399.png"
+                    alt="login website logo"
+                  />
+                </Link>
+                <div className="HomeAndPopular">
+                  <h3>
+                    <Link className="home-link" to="/">
+                      Home
+                    </Link>
+                  </h3>
+                  <h3>
+                    <Link className="popular-link" to="/popular">
+                      Popular
+                    </Link>
+                  </h3>
+                </div>
+              </div>
+              <div className="navRightSide">
+                <div className="navInputElements">
+                  <label className="nav-input-label" htmlFor="inputTaken">
+                    <Link to="/search">
+                      <img
+                        src="https://i.ibb.co/nRjMJ6c/search.png"
+                        alt="search"
+                      />
+                    </Link>
+                  </label>
+                </div>
+
+                <div>
+                  <Link to="/account">
+                    <img
+                      className="avatar"
+                      src="https://i.ibb.co/V3NCT28/Avatar.png"
+                      alt="avatarImage"
+                    />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="inPoster">
@@ -214,7 +258,6 @@ class MovieItemDetails extends Component {
   }
 
   render() {
-    const {movieItemStatus} = this.state
     const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken === undefined) {
@@ -223,8 +266,6 @@ class MovieItemDetails extends Component {
     }
     return (
       <div>
-        {movieItemStatus !== 'SUCCESS' && <NavBar />}
-
         {this.renderMovieItemDetails()}
         <br />
         <div>
