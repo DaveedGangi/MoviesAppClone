@@ -1,0 +1,114 @@
+.similarMovie {
+  width: 255px;
+  height: 170px;
+  top: 758px;
+  left: 165px;
+  gap: 0px;
+  border-radius: 8px;
+  opacity: 0px;
+  margin: 22px;
+}
+.flexSimilarMovies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.flexGenreAndOtherData {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #0d0d0d;
+
+  color: #ffffff;
+}
+
+.more-like {
+  font-family: HK Grotesk;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31.27px;
+  text-align: left;
+  color: #ffffff;
+  width: 146px;
+  height: 31px;
+  top: 703px;
+  left: 165px;
+  gap: 0px;
+  opacity: 0px;
+  margin-left: 33px;
+}
+.flexGenerBg {
+  background-color: #0d0d0d;
+}
+
+.styleParaForDetails {
+  color: #94a3b8;
+  font-family: HK Grotesk;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: left;
+
+  height: 26px;
+  top: 525px;
+  left: 165px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.flexTimingAndOtherDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 180px;
+}
+.inPoster {
+  padding-left: 33px;
+  color: #ffffff;
+}
+.overViewPoster {
+  width: 600px;
+  font-family: HK Grotesk;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: left;
+}
+.UA {
+  border: 1px solid #ffffff;
+  width: Hug (55px) px;
+  height: Hug (27px) px;
+  top: 258px;
+  left: 245.5px;
+  padding: 2px 12px 2px 12px;
+  gap: 10px;
+  border-radius: 2px 0px 0px 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+}
+.titleOnPoster {
+  color: #ffffff;
+  font-family: HK Grotesk;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 62.54px;
+  text-align: left;
+}
+.timeOnPoster {
+  font-family: HK Grotesk;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 23.45px;
+  text-align: left;
+}
+.year {
+  font-family: HK Grotesk;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 23.45px;
+  text-align: left;
+}

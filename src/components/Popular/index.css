@@ -1,0 +1,16 @@
+.popularMovieImages {
+  width: 220px;
+  height: 150px;
+
+  gap: 0px;
+  border-radius: 8px;
+  opacity: 0px;
+  margin: 22px;
+}
+.popularMoviesBg {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
