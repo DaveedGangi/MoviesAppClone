@@ -8,6 +8,8 @@ import Loader from 'react-loader-spinner'
 
 import {HiOutlineSearch} from 'react-icons/hi'
 
+import Pagination from '../Pagination'
+
 import BottomFooter from '../BottomFooter'
 
 import './index.css'
@@ -25,6 +27,8 @@ class Search extends Component {
     userInputs: '',
     searchedDataStatus: searchedStatus.initial,
     storageForSearchedMovies: [],
+    duplicateForSearchDMovies: [],
+    pageNumber: 1,
   }
 
   componentDidMount() {
@@ -67,6 +71,7 @@ class Search extends Component {
       } else {
         this.setState({
           storageForSearchedMovies: searchStorageMovies,
+          duplicateForSearchDMovies: searchStorageMovies.slice(0, 10),
           searchedDataStatus: searchedStatus.success,
         })
       }
@@ -94,6 +99,7 @@ class Search extends Component {
       <div className="bgTextUnknown">
         <div className="bgForWrongUserText">
           <img
+            className="NoMovies"
             testid="no movies"
             src="https://i.ibb.co/qrPMDDV/Group-7394.png"
             alt="no movies"
@@ -105,11 +111,11 @@ class Search extends Component {
   }
 
   successForSearchedMovies = () => {
-    const {storageForSearchedMovies} = this.state
+    const {duplicateForSearchDMovies} = this.state
 
     return (
       <ul className="searchedMoviesBg">
-        {storageForSearchedMovies.map(eachSearchedMovies => (
+        {duplicateForSearchDMovies.map(eachSearchedMovies => (
           <li key={eachSearchedMovies.id}>
             <Link to={`movies/${eachSearchedMovies.id}`}>
               <img
@@ -155,8 +161,26 @@ class Search extends Component {
     }
   }
 
+  changePageNumber = pageNumberData => {
+    const {storageForSearchedMovies} = this.state
+    this.setState({
+      duplicateForSearchDMovies: storageForSearchedMovies.slice(
+        pageNumberData * 10 - 10,
+        pageNumberData * 10,
+      ),
+    })
+  }
+
+  changePagesData = pageNumbers => {
+    this.setState({pageNumber: pageNumbers}, this.fetchingApiAgain)
+  }
+
+  fetchingApiAgain = () => {
+    this.successForSearchedMovies()
+  }
+
   render() {
-    const {userInputs} = this.state
+    const {userInputs, pageNumber, storageForSearchedMovies} = this.state
     const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken === undefined) {
@@ -220,6 +244,13 @@ class Search extends Component {
           </div>
         </div>
         {this.searchedMoviesText()}
+
+        <Pagination
+          data={storageForSearchedMovies}
+          pageNumber={pageNumber}
+          changePageNumber={this.changePageNumber}
+          changePagesData={this.changePagesData}
+        />
 
         <BottomFooter />
       </div>

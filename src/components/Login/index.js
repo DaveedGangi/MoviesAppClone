@@ -64,7 +64,7 @@ class Login extends Component {
           }
 
           return (
-            <div className="bg">
+            <div className="backgroundBgLogin">
               <div className="movies-heading-login">
                 <img
                   className="website-image"

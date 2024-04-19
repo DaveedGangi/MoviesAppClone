@@ -10,6 +10,8 @@ import Loader from 'react-loader-spinner'
 
 import BottomFooter from '../BottomFooter'
 
+import Pagination from '../Pagination'
+
 import './index.css'
 
 const popularStatus = {
@@ -23,6 +25,8 @@ class Popular extends Component {
   state = {
     popularDataStatus: popularStatus.initial,
     popularMovieDataStorage: [],
+    duplicateMovieDataStorage: [],
+    pageNumber: 1,
   }
 
   componentDidMount() {
@@ -61,6 +65,7 @@ class Popular extends Component {
 
       this.setState({
         popularMovieDataStorage: popularMoviesStore,
+        duplicateMovieDataStorage: popularMoviesStore.slice(0, 10),
         popularDataStatus: popularStatus.success,
       })
     } else {
@@ -92,12 +97,14 @@ class Popular extends Component {
   )
 
   successForPopularMovie = () => {
-    const {popularMovieDataStorage} = this.state
+    const {duplicateMovieDataStorage} = this.state
+    console.log('Duplicate')
+    console.log(duplicateMovieDataStorage)
     return (
       <div>
         <ul className="popularMoviesBg">
-          {popularMovieDataStorage.map(eachPopularMovie => (
-            <li>
+          {duplicateMovieDataStorage.map(eachPopularMovie => (
+            <li key={eachPopularMovie.id}>
               <Link to={`movies/${eachPopularMovie.id}`}>
                 <img
                   key={eachPopularMovie.id}
@@ -128,9 +135,27 @@ class Popular extends Component {
     }
   }
 
+  changePageNumber = pageNumberData => {
+    const {popularMovieDataStorage} = this.state
+    this.setState({
+      duplicateMovieDataStorage: popularMovieDataStorage.slice(
+        pageNumberData * 10 - 10,
+        pageNumberData * 10,
+      ),
+    })
+  }
+
+  changePagesData = pageNumbers => {
+    this.setState({pageNumber: pageNumbers}, this.fetchingApiAgain)
+  }
+
+  fetchingApiAgain = () => {
+    this.successForPopularMovie()
+  }
+
   render() {
     const jwtToken = Cookies.get('jwt_token')
-
+    const {popularMovieDataStorage, pageNumber} = this.state
     if (jwtToken === undefined) {
       const {history} = this.props
       history.replace('/login')
@@ -189,6 +214,13 @@ class Popular extends Component {
         {this.popularMovieItems()}
 
         <br />
+
+        <Pagination
+          data={popularMovieDataStorage}
+          pageNumber={pageNumber}
+          changePageNumber={this.changePageNumber}
+          changePagesData={this.changePagesData}
+        />
 
         <BottomFooter />
       </div>

@@ -197,3 +197,211 @@ Previous Arrow buttons according to your project */
 .randomButton {
   margin-top: 22px;
 }
+
+.randomMovieButton {
+  width: 70px;
+  height: 33px;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 767px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-container-for-spinners {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 1100px;
+    margin-top: 10px;
+
+    padding: 0px;
+
+    background-color: #0d0d0d;
+
+    gap: 0px;
+    border-radius: 8px;
+    opacity: 0px;
+    padding: 27px;
+  }
+
+  .HomeTryAgainBg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 400px;
+  }
+
+  .HomeTryAgainTab {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 88%;
+    height: 466px;
+    top: 135px;
+    left: 166px;
+    gap: 0px;
+    border-radius: 8px;
+    opacity: 0px;
+    background-color: #0d0d0d;
+  }
+
+  .slick-container {
+    width: 80%;
+    max-width: 1100px;
+    margin-top: 10px;
+
+    padding: 0px;
+    color: antiquewhite;
+
+    background-color: #0d0d0d;
+
+    gap: 0px;
+    border-radius: 8px;
+    opacity: 0px;
+    padding: 27px;
+  }
+
+  .logo-image {
+    margin: 0px 10px;
+
+    border-radius: 8px;
+    opacity: 0px;
+
+    width: 100px;
+    height: 120px;
+  }
+
+  /* You can change the CSS color to style the Next and 
+Previous Arrow buttons according to your project */
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+
+  .bg-home {
+    width: 100%;
+    height: 1352px;
+    top: 1203px;
+    left: 13167px;
+    gap: 0px;
+    opacity: 0px;
+    background: #181818;
+    color: #ffffff;
+  }
+  .trending-heading {
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31.27px;
+    text-align: left;
+    width: 148px;
+    height: 31px;
+    top: 653px;
+    left: 165px;
+    gap: 0px;
+    opacity: 0px;
+  }
+  .originals-heading {
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31.27px;
+    text-align: left;
+    width: 97px;
+    height: 31px;
+    top: 910px;
+    left: 165px;
+    gap: 0px;
+    opacity: 0px;
+  }
+
+  .movie-poster-random {
+    background: #0d0d0d;
+    width: 100%;
+    height: 466px;
+    top: 135px;
+    left: 166px;
+    gap: 0px;
+    border-radius: 0px;
+    opacity: 0px;
+  }
+  .bgPosterItems {
+    padding: 44px;
+  }
+  .homePosterLoader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #0d0d0d;
+    margin: 22px;
+    height: 150px;
+    align-items: center;
+  }
+  .randomMovieTitle {
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 62px;
+    text-align: left;
+    width: 500px;
+    height: 62px;
+    top: 223px;
+    left: 164px;
+    gap: 0px;
+    opacity: 0px;
+  }
+  .randomMovieOverview {
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 26.06px;
+    text-align: left;
+    width: 340px;
+    height: 78px;
+    top: 309px;
+    left: 164px;
+    gap: 0px;
+    opacity: 0px;
+  }
+  .randomMovieButton {
+    width: Hug (74px) px;
+    height: Hug (40px) px;
+    top: 419px;
+    left: 164.5px;
+    gap: 0px;
+    border-radius: 3px;
+    opacity: 0px;
+    color: #171f46;
+    font-family: HK Grotesk;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+
+    gap: 0px;
+    opacity: 0px;
+  }
+  .randomButton {
+    margin-top: 22px;
+  }
+}

@@ -188,21 +188,23 @@ class MovieItemDetails extends Component {
               </p>
             </div>
             <p className="overViewPoster">{movieItemDataStorage.overview}</p>
-            <button type="button">Play</button>
+            <button className="buttonPlay" type="button">
+              Play
+            </button>
           </div>
         </div>
 
         <div className="flexGenerBg">
           <div>
             <ul className="flexGenreAndOtherData">
-              <li>
+              <li className="listForSingleGenre">
                 <h1 className="styleParaForDetails">genres</h1>
                 {movieItemDataStorage.geners.map(each => (
                   <p key={each.id}>{each.name}</p>
                 ))}
               </li>
 
-              <li>
+              <li className="listForSingleGenre">
                 <h1 className="styleParaForDetails">Audio Available</h1>
                 {movieItemDataStorage.spokenLanguages.map(eachLan => (
                   <div key={eachLan.id}>
@@ -210,13 +212,13 @@ class MovieItemDetails extends Component {
                   </div>
                 ))}
               </li>
-              <li>
+              <li className="listForSingleGenre">
                 <h1 className="styleParaForDetails">Rating Count</h1>
                 <p>{movieItemDataStorage.voteCount}</p>
                 <h1 className="styleParaForDetails">Rating Average</h1>
                 <p>{movieItemDataStorage.voteAverage}</p>
               </li>
-              <li>
+              <li className="listForSingleGenre">
                 <h1 className="styleParaForDetails">Budget</h1>
                 <p>{movieItemDataStorage.budget}</p>
                 <h1 className="styleParaForDetails">Release Date</h1>

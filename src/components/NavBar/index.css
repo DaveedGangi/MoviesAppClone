@@ -115,3 +115,124 @@
 .nav-input-label {
   cursor: pointer;
 }
+
+@media screen and (max-width: 767px) {
+  .navBarBg {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: #131313;
+    color: #f8fafc;
+
+    width: 100vw;
+    height: 103px;
+    gap: 0px;
+    opacity: 0.7;
+  }
+  .navBarBgUl {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+    background-color: #131313;
+    color: #f8fafc;
+
+    width: 100%;
+  }
+  .navLeftSide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 240px;
+  }
+  .website-image {
+    width: 45px;
+    height: 20px;
+    top: 32px;
+    left: 13px;
+    padding: 0px, 0px, 0px, 0px;
+    margin-bottom: 22px;
+  }
+  .HomeAndPopular {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 22px;
+    margin-top: 12px;
+  }
+  .home-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 26px;
+    letter-spacing: -0.35555556416511536px;
+    text-align: left;
+    width: 42px;
+    height: 26px;
+    top: 38px;
+    left: 348px;
+    gap: 0px;
+    opacity: 0px;
+    padding-right: 12px;
+  }
+  .popular-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-family: HK Grotesk;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.35555556416511536px;
+    text-align: left;
+    width: 54px;
+    height: 26px;
+    top: 38px;
+    left: 414px;
+    gap: 0px;
+    opacity: 0px;
+  }
+
+  .navRightSide {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 120px;
+    margin-top: 12px;
+    margin-left: 2px;
+  }
+  .navInputElements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 12px;
+    height: 25px;
+    margin-top: 22px;
+    width: Hug (264px);
+    height: Fixed (40px);
+    top: 32px;
+    left: 931px;
+    gap: 10px;
+  }
+  .navInput {
+    color: #f8fafc;
+    background-color: #131313;
+    width: Fill (264px);
+    height: Hug (40px);
+    padding: 8px, 16px, 8px, 16px;
+    border-radius: 4px;
+    border: 1px;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    top: 28px;
+    margin: 22px;
+  }
+  .nav-input-label {
+    cursor: pointer;
+  }
+}
