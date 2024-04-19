@@ -2,11 +2,13 @@ import {Component} from 'react'
 
 import Loader from 'react-loader-spinner'
 
-import {FiAlertTriangle} from 'react-icons/fi'
-
 import Cookies from 'js-cookie'
 
+import {format} from 'date-fns'
+
 import {Link} from 'react-router-dom'
+
+import {HiOutlineSearch} from 'react-icons/hi'
 
 import BottomFooter from '../BottomFooter'
 
@@ -83,25 +85,26 @@ class MovieItemDetails extends Component {
         movieItemDataStorage: dataOfMovieStore,
         movieItemStatus: movieItemData.success,
       })
+    } else {
+      this.setState({movieItemStatus: movieItemData.failure})
     }
   }
 
   movieItemLoading = () => (
-    <div className="main-container">
-      <div className="slick-container">
-        <div className="main-container-for-spinners">
-          <div className="loader-container" testid="loader">
-            <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
-          </div>
-        </div>
+    <div className="loaderForMovieDetail">
+      <div className="loader-container" testid="loader">
+        <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
       </div>
     </div>
   )
 
   movieItemSuccess = () => {
     const {movieItemDataStorage} = this.state
+
+    const date = new Date(movieItemDataStorage.releaseDataMovie)
+    const formatDate = format(date, 'do MMMM yyyy')
     return (
-      <div>
+      <div className="backMovieBg">
         <div
           style={{
             backgroundImage: `url(${movieItemDataStorage.backDropMovie})`,
@@ -122,7 +125,7 @@ class MovieItemDetails extends Component {
                   <img
                     className="website-image"
                     src="https://i.ibb.co/xDLJrF3/Group-7399.png"
-                    alt="login website logo"
+                    alt="website logo"
                   />
                 </Link>
                 <div className="HomeAndPopular">
@@ -142,10 +145,13 @@ class MovieItemDetails extends Component {
                 <div className="navInputElements">
                   <label className="nav-input-label" htmlFor="inputTaken">
                     <Link to="/search">
-                      <img
-                        src="https://i.ibb.co/nRjMJ6c/search.png"
-                        alt="search"
-                      />
+                      <button
+                        className="searchButton"
+                        testid="searchButton"
+                        type="button"
+                      >
+                        <HiOutlineSearch />
+                      </button>
                     </Link>
                   </label>
                 </div>
@@ -155,7 +161,7 @@ class MovieItemDetails extends Component {
                     <img
                       className="avatar"
                       src="https://i.ibb.co/V3NCT28/Avatar.png"
-                      alt="avatarImage"
+                      alt="profile"
                     />
                   </Link>
                 </div>
@@ -187,43 +193,53 @@ class MovieItemDetails extends Component {
         </div>
 
         <div className="flexGenerBg">
-          <div className="flexGenreAndOtherData">
-            <div>
-              <p className="styleParaForDetails">Generes</p>
-              {movieItemDataStorage.geners.map(each => (
-                <p key={each.id}>{each.name}</p>
-              ))}
-            </div>
+          <div>
+            <ul className="flexGenreAndOtherData">
+              <li>
+                <h1 className="styleParaForDetails">genres</h1>
+                {movieItemDataStorage.geners.map(each => (
+                  <p key={each.id}>{each.name}</p>
+                ))}
+              </li>
 
-            <div>
-              <p className="styleParaForDetails">Audio Available</p>
-              {movieItemDataStorage.spokenLanguages.map(eachLan => (
-                <div key={eachLan.id}>
-                  <p>{eachLan.englishNames}</p>
-                </div>
-              ))}
-            </div>
-            <div>
-              <p className="styleParaForDetails">Rating Count</p>
-              <p>{movieItemDataStorage.voteCount}</p>
-              <p className="styleParaForDetails">Rating Average</p>
-              <p>{movieItemDataStorage.voteAverage}</p>
-            </div>
+              <li>
+                <h1 className="styleParaForDetails">Audio Available</h1>
+                {movieItemDataStorage.spokenLanguages.map(eachLan => (
+                  <div key={eachLan.id}>
+                    <p>{eachLan.englishNames}</p>
+                  </div>
+                ))}
+              </li>
+              <li>
+                <h1 className="styleParaForDetails">Rating Count</h1>
+                <p>{movieItemDataStorage.voteCount}</p>
+                <h1 className="styleParaForDetails">Rating Average</h1>
+                <p>{movieItemDataStorage.voteAverage}</p>
+              </li>
+              <li>
+                <h1 className="styleParaForDetails">Budget</h1>
+                <p>{movieItemDataStorage.budget}</p>
+                <h1 className="styleParaForDetails">Release Date</h1>
+
+                <p>{formatDate}</p>
+              </li>
+            </ul>
           </div>
 
           <div>
             <h1 className="more-like">More like this</h1>
-            <div className="flexSimilarMovies">
+            <ul className="flexSimilarMovies">
               {movieItemDataStorage.similarMovies.map(eachM => (
-                <div key={eachM.id}>
+                <li key={eachM.id}>
                   <img
+                    key={eachM.id}
                     className="similarMovie"
-                    src={eachM.backDropSimilarItem}
+                    src={eachM.posterForSimilarItem}
                     alt={eachM.titleForSimilar}
                   />
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>
@@ -233,7 +249,10 @@ class MovieItemDetails extends Component {
   movieItemFailure = () => (
     <div>
       <div>
-        <FiAlertTriangle />
+        <img
+          src="https://i.ibb.co/9vFb2zC/alert-triangle.png"
+          alt="failure view"
+        />
         <p>Something went wrong. Please try again</p>
         <button onClick={this.movieItemFetch} type="button">
           Try Again
@@ -265,7 +284,7 @@ class MovieItemDetails extends Component {
       history.replace('/login')
     }
     return (
-      <div>
+      <div className="backMovieBg">
         {this.renderMovieItemDetails()}
         <br />
         <div>

@@ -8,8 +8,6 @@ import Cookies from 'js-cookie'
 
 import Loader from 'react-loader-spinner'
 
-import {FiAlertTriangle} from 'react-icons/fi'
-
 import NavBar from '../NavBar'
 
 import BottomFooter from '../BottomFooter'
@@ -117,6 +115,8 @@ class Home extends Component {
         storeListOfTrendingMovies: trendingStorage,
         trendingDataStatus: trendingStatus.success,
       })
+    } else {
+      this.setState({trendingDataStatus: trendingStatus.failure})
     }
   }
 
@@ -149,6 +149,8 @@ class Home extends Component {
         storeListOfOriginalMovies: originalMoviesStorage,
         originalDataStatus: originalMoviesStatus.success,
       })
+    } else {
+      this.setState({originalDataStatus: originalMoviesStatus.failure})
     }
   }
 
@@ -189,7 +191,10 @@ class Home extends Component {
   tryAgainForTrendingMovieItems = () => (
     <div>
       <div>
-        <FiAlertTriangle />
+        <img
+          src="https://i.ibb.co/9vFb2zC/alert-triangle.png"
+          alt="failure view"
+        />
         <p>Something went wrong. Please try again</p>
         <button onClick={this.renderTrendingNowMovies} type="button">
           Try Again
@@ -218,14 +223,15 @@ class Home extends Component {
           />
           <Slider {...settings}>
             {storeListOfTrendingMovies.map(eachLogo => {
-              const {id, posterPath} = eachLogo
+              const {id, posterPath, title} = eachLogo
               return (
                 <div className="slick-item" key={id}>
                   <Link to={`movies/${id}`}>
                     <img
+                      key={id}
                       className="logo-image"
                       src={posterPath}
-                      alt="company logo"
+                      alt={title}
                     />
                   </Link>
                 </div>
@@ -255,7 +261,10 @@ class Home extends Component {
   tryAgainForOriginalMovieItems = () => (
     <div>
       <div>
-        <FiAlertTriangle />
+        <img
+          src="https://i.ibb.co/9vFb2zC/alert-triangle.png"
+          alt="failure view"
+        />
         <p>Something went wrong. Please try again</p>
         <button onClick={this.renderHomeOriginalMovieItems} type="button">
           Try Again
@@ -285,14 +294,15 @@ class Home extends Component {
             />
             <Slider {...settings}>
               {storeListOfOriginalMovies.map(eachLogo => {
-                const {id, posterPath} = eachLogo
+                const {id, posterPath, title} = eachLogo
                 return (
                   <div className="slick-item" key={id}>
                     <Link to={`movies/${id}`}>
                       <img
+                        key={id}
                         className="logo-image"
                         src={posterPath}
-                        alt="company logo"
+                        alt={title}
                       />
                     </Link>
                   </div>
@@ -370,7 +380,10 @@ class Home extends Component {
     <div className="HomeTryAgainBg">
       <div className="HomeTryAgainTab">
         <div>
-          <FiAlertTriangle />
+          <img
+            src="https://i.ibb.co/9vFb2zC/alert-triangle.png"
+            alt="failure view"
+          />
           <p>Something went wrong. Please try again</p>
           <button onClick={this.renderHomePosterMovieItems} type="button">
             Try Again
@@ -388,6 +401,7 @@ class Home extends Component {
 
     return (
       <div
+        key={randomMovieItemPoster.id}
         style={{
           backgroundImage: `url(${randomMovieItemPoster.backDrop})`,
           width: '100%',

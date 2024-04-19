@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import {Redirect} from 'react-router-dom'
+
 import Cookies from 'js-cookie'
 
 import CartContext from '../../Context/index'
@@ -9,18 +11,11 @@ import './index.css'
 class Login extends Component {
   state = {username: '', password: '', errorMsg: '', isTrue: false}
 
-  storeUserName = event => {
-    this.setState({username: event.target.value})
-  }
-
-  storeUserPassword = event => {
-    this.setState({password: event.target.value})
-  }
-
   submitUserData = async event => {
+    event.preventDefault()
     const {username, password} = this.state
     const userDetails = {username, password}
-    event.preventDefault()
+
     const api = 'https://apis.ccbp.in/login'
     const options = {
       method: 'POST',
@@ -44,14 +39,21 @@ class Login extends Component {
     }
   }
 
+  storeUserName = event => {
+    this.setState({username: event.target.value})
+  }
+
+  storeUserPassword = event => {
+    this.setState({password: event.target.value})
+  }
+
   render() {
     const {username, password, errorMsg, isTrue} = this.state
     console.log(username)
     console.log(password)
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken !== undefined) {
-      const {history} = this.props
-      history.replace('/')
+      return <Redirect to="/" />
     }
     return (
       <CartContext.Consumer>
@@ -66,7 +68,7 @@ class Login extends Component {
               <div className="movies-heading-login">
                 <img
                   className="website-image"
-                  src="https://i.ibb.co/sb8t9TB/Screenshot-2024-01-16-132155.png"
+                  src="https://i.ibb.co/xDLJrF3/Group-7399.png"
                   alt="login website logo"
                 />
               </div>
@@ -79,11 +81,12 @@ class Login extends Component {
                   </label>
                   <br />
                   <input
+                    id="username"
                     value={username}
                     onChange={this.storeUserName}
                     className="username"
                     type="text"
-                    placeholder="username"
+                    placeholder="USERNAME"
                   />
                   <br />
                   <br />
@@ -96,7 +99,8 @@ class Login extends Component {
                     onChange={this.storeUserPassword}
                     className="password"
                     type="password"
-                    placeholder="password"
+                    placeholder="PASSWORD"
+                    id="password"
                   />
                   <br />
                   <p className="errorMsg">{errorMsg}</p>

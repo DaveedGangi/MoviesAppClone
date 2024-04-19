@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import Login from './components/Login'
 
@@ -15,6 +15,10 @@ import Popular from './components/Popular'
 import Search from './components/Search'
 
 import MovieItemDetails from './components/MovieItemDetails'
+
+import NotFound from './components/NotFound'
+
+import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
 
@@ -44,12 +48,18 @@ class App extends Component {
           }}
         >
           <Switch>
-            <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/account" component={Account} />
-            <Route exact path="/popular" component={Popular} />
-            <Route exact path="/search" component={Search} />
-            <Route exact path="/movies/:id" component={MovieItemDetails} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute exact path="/account" component={Account} />
+            <ProtectedRoute exact path="/popular" component={Popular} />
+            <ProtectedRoute exact path="/search" component={Search} />
+            <ProtectedRoute
+              exact
+              path="/movies/:id"
+              component={MovieItemDetails}
+            />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect to="not-found" />
           </Switch>
         </CartContext.Provider>
       </div>

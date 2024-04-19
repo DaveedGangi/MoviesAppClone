@@ -17,7 +17,8 @@ class BottomFooter extends Component {
           &nbsp;&nbsp;
           <FaYoutube />
         </div>
-        <p className="contact-us">Contact Us</p>
+
+        <p className="contactUs">Contact us</p>
       </div>
     )
   }

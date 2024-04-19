@@ -2,11 +2,11 @@ import {Component} from 'react'
 
 import {Link} from 'react-router-dom'
 
+import {HiOutlineSearch} from 'react-icons/hi'
+
 import Cookies from 'js-cookie'
 
 import Loader from 'react-loader-spinner'
-
-import {FiAlertTriangle} from 'react-icons/fi'
 
 import BottomFooter from '../BottomFooter'
 
@@ -69,13 +69,9 @@ class Popular extends Component {
   }
 
   loaderForPopularMovie = () => (
-    <div className="main-container">
-      <div className="slick-container">
-        <div className="main-container-for-spinners">
-          <div className="loader-container" testid="loader">
-            <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
-          </div>
-        </div>
+    <div className="loaderForPopular">
+      <div className="loader-container" testid="loader">
+        <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
       </div>
     </div>
   )
@@ -83,7 +79,10 @@ class Popular extends Component {
   failureForPopularMovie = () => (
     <div>
       <div>
-        <FiAlertTriangle />
+        <img
+          src="https://i.ibb.co/TYdGbZK/Background-Complete.png"
+          alt="failure view"
+        />
         <p>Something went wrong. Please try again</p>
         <button onClick={this.fetchPopularMovies} type="button">
           Try Again
@@ -96,19 +95,20 @@ class Popular extends Component {
     const {popularMovieDataStorage} = this.state
     return (
       <div>
-        <div className="popularMoviesBg">
+        <ul className="popularMoviesBg">
           {popularMovieDataStorage.map(eachPopularMovie => (
-            <div key={eachPopularMovie.id}>
+            <li>
               <Link to={`movies/${eachPopularMovie.id}`}>
                 <img
+                  key={eachPopularMovie.id}
                   className="popularMovieImages"
-                  src={eachPopularMovie.backDropForPopular}
+                  src={eachPopularMovie.posterForPopular}
                   alt={eachPopularMovie.title}
                 />
               </Link>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     )
   }
@@ -136,14 +136,14 @@ class Popular extends Component {
       history.replace('/login')
     }
     return (
-      <div>
-        <div className="navBarBgp">
-          <div className="navLeftSide">
+      <div className="popularBg">
+        <ul className="navBarBgp">
+          <li className="navLeftSide">
             <Link to="/" className="webSiteImageNav">
               <img
                 className="website-image"
                 src="https://i.ibb.co/xDLJrF3/Group-7399.png"
-                alt="login website logo"
+                alt="website logo"
               />
             </Link>
             <div className="HomeAndPopular">
@@ -158,12 +158,18 @@ class Popular extends Component {
                 </Link>
               </h3>
             </div>
-          </div>
-          <div className="navRightSide">
+          </li>
+          <li className="navRightSide">
             <div className="navInputElements">
               <label className="nav-input-label" htmlFor="inputTaken">
-                <Link to="search">
-                  <img src="https://i.ibb.co/nRjMJ6c/search.png" alt="search" />
+                <Link to="/search">
+                  <button
+                    className="searchButton"
+                    testid="searchButton"
+                    type="button"
+                  >
+                    <HiOutlineSearch />
+                  </button>
                 </Link>
               </label>
             </div>
@@ -173,12 +179,12 @@ class Popular extends Component {
                 <img
                   className="avatar"
                   src="https://i.ibb.co/V3NCT28/Avatar.png"
-                  alt="avatarImage"
+                  alt="profile"
                 />
               </Link>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
 
         {this.popularMovieItems()}
 

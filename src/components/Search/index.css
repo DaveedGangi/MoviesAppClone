@@ -1,6 +1,6 @@
 .searchedMovieImages {
-  width: 255px;
-  height: 170px;
+  width: 180px;
+  height: 230px;
   top: 135px;
   left: 166px;
   gap: 0px;
@@ -51,4 +51,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.searchButton {
+  background-color: #131313;
+  color: #ffffff;
+  border: 0px;
+  cursor: pointer;
+  outline: none;
+}
+.BGsearch {
+  background-color: #131313;
+}
+.loaderForSearch {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
 }

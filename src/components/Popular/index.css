@@ -1,6 +1,6 @@
 .popularMovieImages {
-  width: 220px;
-  height: 150px;
+  width: 180px;
+  height: 250px;
 
   gap: 0px;
   border-radius: 8px;
@@ -15,7 +15,16 @@
   flex-wrap: wrap;
   background-color: #0d0d0d;
   background-size: cover;
+  list-style-type: none;
+  margin: 33px;
+  border-radius: 22px;
+  padding: 22px;
 }
+.popularBg {
+  background-color: #181818;
+  height: 100%;
+}
+
 .navBarBgp {
   display: flex;
   flex-direction: row;
@@ -28,4 +37,13 @@
   height: 103px;
   gap: 0px;
   opacity: 0px;
+  list-style-type: none;
+}
+.loaderForPopular {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d0d0d;
+  height: 400px;
 }

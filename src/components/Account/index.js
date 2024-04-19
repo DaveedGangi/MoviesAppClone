@@ -12,6 +12,8 @@ import './index.css'
 
 class Account extends Component {
   removingCookie = () => {
+    const {history} = this.props
+    history.replace('/login')
     Cookies.remove('jwt_token')
   }
 
@@ -30,14 +32,17 @@ class Account extends Component {
                     <h1>Account</h1>
                     <hr />
                     <div>
-                      <h1>Member ship</h1>
+                      <p>Member ship</p>
                       <h1>{userNames}@gmail.com</h1>
                       <p>Password: * * * * * * * * *</p>
                     </div>
                     <hr />
                     <p>
                       Plan details Premium &nbsp; &nbsp;
-                      <span style={{border: '1px solid black'}}> Ultra HD</span>
+                      <span style={{border: '1px solid black'}}>
+                        {' '}
+                        <p>Ultra HD</p>
+                      </span>
                     </p>
                     <hr />
                     <div>

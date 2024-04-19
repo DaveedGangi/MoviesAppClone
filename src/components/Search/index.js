@@ -6,6 +6,8 @@ import {Link} from 'react-router-dom'
 
 import Loader from 'react-loader-spinner'
 
+import {HiOutlineSearch} from 'react-icons/hi'
+
 import BottomFooter from '../BottomFooter'
 
 import './index.css'
@@ -15,6 +17,7 @@ const searchedStatus = {
   isLoading: 'LOADER',
   failure: 'FAILURE',
   success: 'SUCCESS',
+  isNoMovies: 'NOMOVIES',
 }
 
 class Search extends Component {
@@ -29,7 +32,7 @@ class Search extends Component {
   }
 
   searchFetch = async () => {
-    this.setState({searchedDataStatus: searchedStatus.initial})
+    this.setState({searchedDataStatus: searchedStatus.isLoading})
     const {userInputs} = this.state
     const jwtToken = Cookies.get('jwt_token')
 
@@ -59,13 +62,15 @@ class Search extends Component {
           title: searchMovie.title,
         }),
       )
-
-      this.setState({
-        storageForSearchedMovies: searchStorageMovies,
-        searchedDataStatus: searchedStatus.success,
-      })
-    }
-    if (searchResponseJson.results.length === 0) {
+      if (searchResponseJson.results.length === 0) {
+        this.setState({searchedDataStatus: searchedStatus.isNoMovies})
+      } else {
+        this.setState({
+          storageForSearchedMovies: searchStorageMovies,
+          searchedDataStatus: searchedStatus.success,
+        })
+      }
+    } else {
       this.setState({searchedDataStatus: searchedStatus.failure})
     }
   }
@@ -75,20 +80,24 @@ class Search extends Component {
   }
 
   loaderForSearchedMovies = () => (
-    <div>
+    <div className="loaderForSearch">
       <div className="loader-container" testid="loader">
         <Loader type="TailSpin" color="#D81F26" height={50} width={50} />
       </div>
     </div>
   )
 
-  failureForSearchedMovies = () => {
+  noMoviesFound = () => {
     const {userInputs} = this.state
 
     return (
       <div className="bgTextUnknown">
         <div className="bgForWrongUserText">
-          <img src="https://i.ibb.co/qrPMDDV/Group-7394.png" alt="not-found" />
+          <img
+            testid="no movies"
+            src="https://i.ibb.co/qrPMDDV/Group-7394.png"
+            alt="no movies"
+          />
           <p>Your search for {userInputs} did not find any matches.</p>
         </div>
       </div>
@@ -99,21 +108,35 @@ class Search extends Component {
     const {storageForSearchedMovies} = this.state
 
     return (
-      <div className="searchedMoviesBg">
+      <ul className="searchedMoviesBg">
         {storageForSearchedMovies.map(eachSearchedMovies => (
-          <div key={eachSearchedMovies.id}>
+          <li key={eachSearchedMovies.id}>
             <Link to={`movies/${eachSearchedMovies.id}`}>
               <img
+                key={eachSearchedMovies.id}
                 className="searchedMovieImages"
-                src={eachSearchedMovies.backDropSearchMovie}
+                src={eachSearchedMovies.searchMoviePoster}
                 alt={eachSearchedMovies.title}
               />
             </Link>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     )
   }
+
+  failureForSearchedMovies = () => (
+    <div>
+      <img
+        src="https://i.ibb.co/TYdGbZK/Background-Complete.png"
+        alt="failure view"
+      />
+      <p>Something went wrong. Please try again</p>
+      <button onClick={this.fetchPopularMovies} type="button">
+        Try Again
+      </button>
+    </div>
+  )
 
   searchedMoviesText = () => {
     const {searchedDataStatus} = this.state
@@ -121,6 +144,8 @@ class Search extends Component {
     switch (searchedDataStatus) {
       case searchedStatus.isLoading:
         return this.loaderForSearchedMovies()
+      case searchedStatus.isNoMovies:
+        return this.noMoviesFound()
       case searchedStatus.failure:
         return this.failureForSearchedMovies()
       case searchedStatus.success:
@@ -132,8 +157,14 @@ class Search extends Component {
 
   render() {
     const {userInputs} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+
+    if (jwtToken === undefined) {
+      const {history} = this.props
+      history.replace('/login')
+    }
     return (
-      <div>
+      <div className="BGsearch">
         <div className="navBarBgs">
           <div className="navLeftSide">
             <Link to="/" className="webSiteImageNav">
@@ -166,11 +197,14 @@ class Search extends Component {
                 id="inputTaken"
               />
               <label className="nav-input-label" htmlFor="inputTaken">
-                <img
+                <button
+                  className="searchButton"
+                  testid="searchButton"
+                  type="button"
                   onClick={this.searchFetch}
-                  src="https://i.ibb.co/nRjMJ6c/search.png"
-                  alt="search"
-                />
+                >
+                  <HiOutlineSearch />
+                </button>
               </label>
             </div>
 
@@ -179,13 +213,12 @@ class Search extends Component {
                 <img
                   className="avatar"
                   src="https://i.ibb.co/V3NCT28/Avatar.png"
-                  alt="avatarImage"
+                  alt="profile"
                 />
               </Link>
             </div>
           </div>
         </div>
-
         {this.searchedMoviesText()}
 
         <BottomFooter />

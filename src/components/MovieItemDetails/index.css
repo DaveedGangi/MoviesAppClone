@@ -1,6 +1,6 @@
 .similarMovie {
-  width: 255px;
-  height: 170px;
+  width: 180px;
+  height: 230px;
   top: 758px;
   left: 165px;
   gap: 0px;
@@ -14,6 +14,7 @@
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+  margin: 22px;
 }
 
 .flexGenreAndOtherData {
@@ -24,6 +25,7 @@
   background-color: #0d0d0d;
 
   color: #ffffff;
+  list-style-type: none;
 }
 
 .more-like {
@@ -39,10 +41,15 @@
   left: 165px;
   gap: 0px;
   opacity: 0px;
-  margin-left: 33px;
+  margin-left: 90px;
 }
 .flexGenerBg {
   background-color: #0d0d0d;
+  height: 100%;
+  background-size: cover;
+}
+.backMovieBg {
+  background-color: #131313;
 }
 
 .styleParaForDetails {
@@ -124,4 +131,11 @@
   height: 103px;
   gap: 0px;
   opacity: 0.8;
+}
+.loaderForMovieDetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 440px;
 }
