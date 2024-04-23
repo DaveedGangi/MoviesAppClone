@@ -57,7 +57,6 @@
   top: 38px;
   left: 348px;
   gap: 0px;
-  opacity: 0px;
 }
 .popular-link {
   text-decoration: none;
@@ -73,7 +72,6 @@
   top: 38px;
   left: 414px;
   gap: 0px;
-  opacity: 0px;
 }
 
 .navRightSide {
@@ -176,7 +174,7 @@
     top: 38px;
     left: 348px;
     gap: 0px;
-    opacity: 0px;
+
     padding-right: 12px;
   }
   .popular-link {
@@ -193,7 +191,6 @@
     top: 38px;
     left: 414px;
     gap: 0px;
-    opacity: 0px;
   }
 
   .navRightSide {

@@ -1,8 +1,8 @@
-.FooterBg {
+.FooterBgB {
   width: 100%;
   height: 221px;
   top: 803px;
-  background-color: #181818;
+  background-color: #0a0909;
   color: #ffffff;
 
   display: flex;
@@ -30,7 +30,7 @@
   top: 1268px;
   left: 680px;
   gap: 0px;
-  opacity: 0px;
+
   background-color: #181818;
 }
 
@@ -45,6 +45,6 @@ FaGoogle {
   top: 899px;
   left: 647px;
   gap: 0px;
-  opacity: 0px;
+
   color: #ffffff;
 }

@@ -188,7 +188,7 @@ class MovieItemDetails extends Component {
               </p>
             </div>
             <p className="overViewPoster">{movieItemDataStorage.overview}</p>
-            <button className="buttonPlay" type="button">
+            <button className="randomMovieButton" type="button">
               Play
             </button>
           </div>

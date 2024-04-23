@@ -19,7 +19,7 @@ import './index.css'
 
 const settings = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 1,
@@ -41,7 +41,7 @@ const settings = {
     {
       breakpoint: 480,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,
       },
     },
@@ -196,7 +196,11 @@ class Home extends Component {
           alt="failure view"
         />
         <p>Something went wrong. Please try again</p>
-        <button onClick={this.renderTrendingNowMovies} type="button">
+        <button
+          className="tryAgain"
+          onClick={this.renderTrendingNowMovies}
+          type="button"
+        >
           Try Again
         </button>
       </div>
@@ -266,7 +270,11 @@ class Home extends Component {
           alt="failure view"
         />
         <p>Something went wrong. Please try again</p>
-        <button onClick={this.renderHomeOriginalMovieItems} type="button">
+        <button
+          className="tryAgain"
+          onClick={this.renderHomeOriginalMovieItems}
+          type="button"
+        >
           Try Again
         </button>
       </div>
@@ -385,7 +393,11 @@ class Home extends Component {
             alt="failure view"
           />
           <p>Something went wrong. Please try again</p>
-          <button onClick={this.renderHomePosterMovieItems} type="button">
+          <button
+            className="tryAgain"
+            onClick={this.renderHomePosterMovieItems}
+            type="button"
+          >
             Try Again
           </button>
         </div>
@@ -407,7 +419,7 @@ class Home extends Component {
           width: '100%',
           height: '605px',
           top: '135px',
-          left: '166px',
+          paddingTop: '1px',
           gap: '0px',
           borderRadius: '0px',
           opacity: '0.8',

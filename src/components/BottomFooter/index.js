@@ -7,7 +7,7 @@ import './index.css'
 class BottomFooter extends Component {
   render() {
     return (
-      <div className="FooterBg">
+      <div className="FooterBgB">
         <div>
           <FaGoogle />
           &nbsp;&nbsp;

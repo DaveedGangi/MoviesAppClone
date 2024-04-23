@@ -198,18 +198,19 @@ class Search extends Component {
                 alt="login website logo"
               />
             </Link>
-            <div className="HomeAndPopular">
-              <h3>
+            <ul className="HomeAndPopularSearch">
+              <li>
                 <Link className="home-link" to="/">
                   Home
                 </Link>
-              </h3>
-              <h3>
+              </li>
+
+              <li>
                 <Link className="popular-link" to="/popular">
                   Popular
                 </Link>
-              </h3>
-            </div>
+              </li>
+            </ul>
           </div>
           <div className="navRightSides">
             <div className="navInputElements">
@@ -235,7 +236,7 @@ class Search extends Component {
             <div>
               <Link to="/account">
                 <img
-                  className="avatar"
+                  className="avatarS"
                   src="https://i.ibb.co/V3NCT28/Avatar.png"
                   alt="profile"
                 />
