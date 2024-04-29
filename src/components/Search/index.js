@@ -47,10 +47,8 @@ class Search extends Component {
       },
     }
 
-    const searchText = userInputs
-
     const searchResponse = await fetch(
-      `https://apis.ccbp.in/movies-app/movies-search?search=${searchText}`,
+      `https://apis.ccbp.in/movies-app/movies-search?search=${userInputs}`,
       options,
     )
 
@@ -213,7 +211,7 @@ class Search extends Component {
             </ul>
           </div>
           <div className="navRightSides">
-            <div className="navInputElements">
+            <div className="navInputElementsS">
               <input
                 value={userInputs}
                 onChange={this.changeUserInput}
@@ -244,6 +242,7 @@ class Search extends Component {
             </div>
           </div>
         </div>
+
         {this.searchedMoviesText()}
 
         <Pagination

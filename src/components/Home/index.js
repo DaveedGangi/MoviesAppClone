@@ -6,9 +6,9 @@ import Slider from 'react-slick'
 
 import Cookies from 'js-cookie'
 
-import Loader from 'react-loader-spinner'
+import {HiOutlineSearch} from 'react-icons/hi'
 
-import NavBar from '../NavBar'
+import Loader from 'react-loader-spinner'
 
 import BottomFooter from '../BottomFooter'
 
@@ -80,7 +80,6 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.renderHomeOriginalMovieItems()
     this.renderTrendingNowMovies()
     this.renderHomePosterMovieItems()
   }
@@ -120,8 +119,12 @@ class Home extends Component {
     }
   }
 
-  renderHomeOriginalMovieItems = async () => {
-    this.setState({originalDataStatus: originalMoviesStatus.isLoading})
+  renderHomePosterMovieItems = async () => {
+    this.setState({
+      homePosterDataStatus: homeRandomPosterStatus.isLoading,
+      originalDataStatus: originalMoviesStatus.isLoading,
+    })
+
     const api = 'https://apis.ccbp.in/movies-app/originals'
     const jwtToken = Cookies.get('jwt_token')
     const options = {
@@ -135,6 +138,7 @@ class Home extends Component {
     console.log(response)
     if (response.ok === true) {
       const responseOriginalsJson = await response.json()
+
       console.log('Originals')
       console.log(responseOriginalsJson)
       const originalMoviesStorage = responseOriginalsJson.results.map(each => ({
@@ -144,13 +148,40 @@ class Home extends Component {
         posterPath: each.poster_path,
         title: each.title,
       }))
-      console.log(originalMoviesStorage)
+
       this.setState({
         storeListOfOriginalMovies: originalMoviesStorage,
+        homePosterDataStatus: homeRandomPosterStatus.success,
         originalDataStatus: originalMoviesStatus.success,
       })
     } else {
-      this.setState({originalDataStatus: originalMoviesStatus.failure})
+      this.setState({
+        homePosterDataStatus: homeRandomPosterStatus.failure,
+        originalDataStatus: originalMoviesStatus.failure,
+      })
+    }
+
+    const {storeListOfOriginalMovies} = this.state
+
+    const homeMoviePoster = storeListOfOriginalMovies
+
+    const randomMovie =
+      homeMoviePoster[Math.ceil(Math.random() * homeMoviePoster.length)]
+    if (randomMovie === undefined) {
+      this.setState({
+        homePosterDataStatus: homeRandomPosterStatus.failure,
+        randomMovieItemPoster: '',
+      })
+    } else if (homeMoviePoster.length === 0) {
+      this.setState({
+        homePosterDataStatus: homeRandomPosterStatus.failure,
+        randomMovieItemPoster: '',
+      })
+    } else {
+      this.setState({
+        randomMovieItemPoster: randomMovie,
+        homePosterDataStatus: homeRandomPosterStatus.success,
+      })
     }
   }
 
@@ -228,9 +259,10 @@ class Home extends Component {
           <Slider {...settings}>
             {storeListOfTrendingMovies.map(eachLogo => {
               const {id, posterPath, title} = eachLogo
+
               return (
                 <div className="slick-item" key={id}>
-                  <Link to={`movies/${id}`}>
+                  <Link key={id} to={`movies/${id}`}>
                     <img
                       key={id}
                       className="logo-image"
@@ -272,7 +304,7 @@ class Home extends Component {
         <p>Something went wrong. Please try again</p>
         <button
           className="tryAgain"
-          onClick={this.renderHomeOriginalMovieItems}
+          onClick={this.renderHomePosterMovieItems}
           type="button"
         >
           Try Again
@@ -305,7 +337,7 @@ class Home extends Component {
                 const {id, posterPath, title} = eachLogo
                 return (
                   <div className="slick-item" key={id}>
-                    <Link to={`movies/${id}`}>
+                    <Link key={id} to={`movies/${id}`}>
                       <img
                         key={id}
                         className="logo-image"
@@ -321,67 +353,6 @@ class Home extends Component {
         </div>
       </div>
     )
-  }
-
-  renderHomePosterMovieItems = async () => {
-    this.setState({homePosterDataStatus: homeRandomPosterStatus.isLoading})
-    const api = 'https://apis.ccbp.in/movies-app/originals'
-    const jwtToken = Cookies.get('jwt_token')
-    const options = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-    }
-
-    const response = await fetch(api, options)
-    console.log(response)
-    if (response.ok === true) {
-      const responseOriginalsJson = await response.json()
-      console.log('Originals')
-      console.log(responseOriginalsJson)
-      const originalMoviesStorage = responseOriginalsJson.results.map(each => ({
-        id: each.id,
-        backDrop: each.backdrop_path,
-        overView: each.overview,
-        posterPath: each.poster_path,
-        title: each.title,
-      }))
-      console.log(originalMoviesStorage)
-      this.setState({
-        storeListOfOriginalMovies: originalMoviesStorage,
-        homePosterDataStatus: homeRandomPosterStatus.success,
-      })
-    } else {
-      this.setState({homePosterDataStatus: homeRandomPosterStatus.failure})
-    }
-
-    const {storeListOfTrendingMovies, storeListOfOriginalMovies} = this.state
-    this.setState({homePosterDataStatus: homeRandomPosterStatus.isLoading})
-    const homeMoviePoster = [
-      ...storeListOfTrendingMovies,
-      ...storeListOfOriginalMovies,
-    ]
-
-    const randomMovie =
-      homeMoviePoster[Math.ceil(Math.random() * homeMoviePoster.length)]
-
-    if (randomMovie === undefined) {
-      this.setState({
-        homePosterDataStatus: homeRandomPosterStatus.failure,
-        randomMovieItemPoster: '',
-      })
-    } else if (homeMoviePoster.length === 0) {
-      this.setState({
-        homePosterDataStatus: homeRandomPosterStatus.failure,
-        randomMovieItemPoster: '',
-      })
-    } else {
-      this.setState({
-        randomMovieItemPoster: randomMovie,
-        homePosterDataStatus: homeRandomPosterStatus.success,
-      })
-    }
   }
 
   tryAgainForHomeMovieItems = () => (
@@ -409,35 +380,33 @@ class Home extends Component {
     const {randomMovieItemPoster} = this.state
     console.log('belowRandomHooray')
     console.log(randomMovieItemPoster)
-    console.log(randomMovieItemPoster.backDrop)
 
     return (
-      <div
-        key={randomMovieItemPoster.id}
-        style={{
-          backgroundImage: `url(${randomMovieItemPoster.backDrop})`,
-          width: '100%',
-          height: '605px',
-          top: '135px',
-          paddingTop: '1px',
-          gap: '0px',
-          borderRadius: '0px',
-          opacity: '0.8',
-          backgroundSize: 'cover',
-        }}
-      >
-        <div>
-          <NavBar />
-        </div>
-        <div className="inPoster">
-          <h1 className="titleOnPoster">{randomMovieItemPoster.title}</h1>
+      <div className="basedOnDeviceWidth">
+        <div
+          key={randomMovieItemPoster.id}
+          style={{
+            backgroundImage: `url(${randomMovieItemPoster.backDrop})`,
+            width: '100%',
+            height: '605px',
+            top: '135px',
+            paddingTop: '1px',
+            gap: '0px',
+            borderRadius: '0px',
+            opacity: '0.8',
+            backgroundSize: 'cover',
+          }}
+        >
+          <div className="inPoster">
+            <h1 className="titleOnPoster">{randomMovieItemPoster.title}</h1>
 
-          <p className="overViewPoster">{randomMovieItemPoster.overView}</p>
+            <h1 className="overViewPoster">{randomMovieItemPoster.overView}</h1>
 
-          <div className="randomButton">
-            <button className="randomMovieButton" type="button">
-              Play
-            </button>
+            <div className="randomButton">
+              <button className="randomMovieButton" type="button">
+                Play
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -477,6 +446,7 @@ class Home extends Component {
   render() {
     const jwtToken = Cookies.get('jwt_token')
     const {homePosterDataStatus} = this.state
+    console.log(homePosterDataStatus)
     if (jwtToken === undefined) {
       const {history} = this.props
       history.replace('/login')
@@ -484,16 +454,62 @@ class Home extends Component {
 
     return (
       <div className="bg-home">
-        {homePosterDataStatus !== 'SUCCESS' && <NavBar />}
+        <ul className="navBarBgp">
+          <li className="navLeftSide">
+            <Link to="/" className="webSiteImageNav">
+              <img
+                className="website-image"
+                src="https://i.ibb.co/xDLJrF3/Group-7399.png"
+                alt="website logo"
+              />
+            </Link>
+            <div className="HomeAndPopular">
+              <h3>
+                <Link className="home-link" to="/">
+                  Home
+                </Link>
+              </h3>
+              <h3>
+                <Link className="popular-link" to="/popular">
+                  Popular
+                </Link>
+              </h3>
+            </div>
+          </li>
+          <li className="navRightSide">
+            <div className="navInputElements">
+              <label className="nav-input-label" htmlFor="inputTaken">
+                <Link to="/search">
+                  <button
+                    className="searchButton"
+                    testid="searchButton"
+                    type="button"
+                  >
+                    <HiOutlineSearch />
+                  </button>
+                </Link>
+              </label>
+            </div>
+
+            <div>
+              <Link to="/account">
+                <img
+                  className="avatar"
+                  src="https://i.ibb.co/V3NCT28/Avatar.png"
+                  alt="profile"
+                />
+              </Link>
+            </div>
+          </li>
+        </ul>
+
         {this.homePosterItems()}
 
         {this.trendingMovieItems()}
 
         {this.originalMoviesItems()}
 
-        <div>
-          <BottomFooter />
-        </div>
+        <BottomFooter />
       </div>
     )
   }

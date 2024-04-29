@@ -78,6 +78,12 @@
 .home-link {
   margin-right: 22px;
 }
+.navInput {
+  margin-right: 4px;
+}
+.navInputElementsS {
+  margin-top: 12px;
+}
 
 @media screen and (max-width: 767px) {
   .searchedMovieImages {
@@ -155,7 +161,14 @@
     align-items: center;
     height: 400px;
   }
-  .navInput {
-    width: 44px;
+  .navInputS {
+    width: 200px;
+    outline: none;
+    background-color: #f8fafc;
+    color: brown;
+    border: 0px;
+  }
+  .avatarS {
+    margin-left: 77px;
   }
 }

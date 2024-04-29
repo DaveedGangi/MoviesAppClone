@@ -108,7 +108,7 @@ class MovieItemDetails extends Component {
         <div
           style={{
             backgroundImage: `url(${movieItemDataStorage.backDropMovie})`,
-            width: '100%',
+            width: '100vw',
             height: '605px',
             top: '135px',
             left: '166px',
@@ -193,7 +193,6 @@ class MovieItemDetails extends Component {
             </button>
           </div>
         </div>
-
         <div className="flexGenerBg">
           <div>
             <ul className="flexGenreAndOtherData">

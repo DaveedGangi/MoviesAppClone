@@ -1,7 +1,5 @@
 import {Component} from 'react'
 
-import {Redirect} from 'react-router-dom'
-
 import Cookies from 'js-cookie'
 
 import CartContext from '../../Context/index'
@@ -51,15 +49,14 @@ class Login extends Component {
     const {username, password, errorMsg, isTrue} = this.state
     console.log(username)
     console.log(password)
-    const jwtToken = Cookies.get('jwt_token')
-    if (jwtToken !== undefined) {
-      return <Redirect to="/" />
-    }
+    console.log(isTrue)
+
     return (
       <CartContext.Consumer>
         {value => {
           const {updatingName} = value
-          if (isTrue === true) {
+
+          const updateName = () => {
             updatingName(username)
           }
 
@@ -106,7 +103,11 @@ class Login extends Component {
                   <p className="errorMsg">{errorMsg}</p>
                   <br />
                   <div>
-                    <button className="login-button" type="submit">
+                    <button
+                      onClick={updateName}
+                      className="login-button"
+                      type="submit"
+                    >
                       Login
                     </button>
                   </div>
